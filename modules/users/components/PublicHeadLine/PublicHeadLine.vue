@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { string } from 'zod'
-
 const props = withDefaults(
   defineProps<{
     name: string

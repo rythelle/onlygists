@@ -12,6 +12,12 @@ const props = defineProps<{
         <h3 class="font-[Inter] text-lg font-bold text-left text-gray-700">{{ props.title }}</h3>
         <p v-if="props.subTitle" class="font-[Inter] text-sm text-gray-500 text-left">{{ props.subTitle }}</p>
       </div>
+
+      <slot name="header-actions" />
+    </div>
+
+    <div class="py-2">
+      <slot />
     </div>
   </div>
 </template>
