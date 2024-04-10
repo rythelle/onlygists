@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import SocialForm from '@/modules/auth/components/SocialForm/SocialForm.vue'
 
-let loading = ref<boolean>(false)
+const services = useServices()
+const loading = ref<boolean>(false)
 
 const handleGithubLogin = async () => {
   loading.value = true
-  // @TODO call api
+
+  await services.auth.signInWithGithub()
 }
 </script>
 
 <template>
-  <section class="w-full h-screen flex flex-col items-center justify-center gap-5 bg-gray-5">
+  <section class="w-full h-screen flex flex-col items-center justify-center gap-5 bg-gray-50">
     <Logo />
-    <SocialForm @wants-login-with-github="handleGithubLogin" :loading="loading" />
+    <SocialForm :loading="loading" @wants-login-with-github="handleGithubLogin" />
   </section>
 </template>

@@ -73,3 +73,11 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+# Supabase
+supabase login
+na raiz do projeto supabase init
+supabase migration new create_sales_table
+supabase start
+supabase stop
+supabase db reset
