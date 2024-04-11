@@ -1,5 +1,5 @@
-import type { SupabaseClient } from '@supabase/supabase-js'
 import type { Database } from '@/libs/supabase/schema'
+import type { SupabaseClient } from '@supabase/supabase-js'
 
 interface ServiceOptions {
   redirectToUrl: string

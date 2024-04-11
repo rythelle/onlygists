@@ -1,3 +1,6 @@
 <template>
-  <NuxtLayout> <NuxtPage></NuxtPage></NuxtLayout>
+  <NuxtLayout>
+    <Toast />
+    <NuxtPage />
+  </NuxtLayout>
 </template>
