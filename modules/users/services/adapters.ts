@@ -18,25 +18,25 @@ export function searchAddressByZipCodeAdapter(data: SearchAddressResponse): Addr
   }
 }
 
-// export function readOneByUsernameAdapter(data: Row | null): User | null {
-//   if (!data) {
-//     return null
-//   }
+export function readOneByUsernameAdapter(data: Row | null): User | null {
+  if (!data) {
+    return null
+  }
 
-//   const address = data.address as unknown as Address
+  const address = data.address as unknown as Address
 
-//   return {
-//     id: data.id,
-//     avatarUrl: data.avatar_url,
-//     username: data.username,
-//     name: data.name,
-//     site: data.site ?? undefined,
-//     bio: data.bio ?? undefined,
-//     phone: data.phone ?? undefined,
-//     address,
-//     createdAt: new Date(data.created_at),
-//   }
-// }
+  return {
+    id: data.id,
+    avatarUrl: data.avatar_url,
+    username: data.username,
+    name: data.name,
+    site: data.site ?? undefined,
+    bio: data.bio ?? undefined,
+    phone: data.phone ?? undefined,
+    address,
+    createdAt: new Date(data.created_at),
+  }
+}
 
 export function getMyselfAdapter(data: Row | null): User | null {
   if (!data) {

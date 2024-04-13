@@ -6,31 +6,39 @@ import GistCardGroup from '@/modules/gists/components/Card/Group/Group.vue'
 import GistCardGroupLoader from '@/modules/gists/components/Card/Group/Loader.vue'
 import GistCardItem from '@/modules/gists/components/Card/Item/Item.vue'
 import { myselfKey } from '@/modules/users/composables/useMyself/useMyself'
+import type { MyselfContextProvider } from '@/modules/users/composables/useMyself/types'
 
-// import { useGistsReport } from '@/modules/reports/composables/useGistsReport/useGistsReport'
-// import { useGistList } from '@/modules/gists/composables/useGistList/useGistList'
+// import PaymentSetupAlert from '@/modules/payments/components/PaymentSetupAlert/PaymentSetupAlert.vue'
+
+import { useGistsReport } from '@/modules/reports/composables/useGistsReport/useGistsReport'
+import { useGistList } from '@/modules/gists/composables/useGistList/useGistList'
+
+// import { useStripeAccountCreate } from '@/modules/payments/composables/useStripeAccountCreate/useStripeAccountCreate'
+// import { useStripeAccountValidate } from '@/modules/payments/composables/useStripeAccountValidate/useStripeAccountValidate'
 
 import { useScroll } from '@vueuse/core'
-import type { MyselfContextProvider } from '@/modules/users/composables/useMyself/types'
 
 const route = useRoute()
 const router = useRouter()
 const { user } = inject(myselfKey) as MyselfContextProvider
 
-// const {
-//   loading: reportLoading,
-//   totalGists,
-//   totalFreeGists,
-//   totalPaidGists,
-//   totalSoldGists,
-// } = useGistsReport({
-//   user,
-//   isMyself: true,
-// })
+// const { loading: paymentCreateLoading, create } = useStripeAccountCreate()
+// const { isValid, validate } = useStripeAccountValidate()
 
-// const { gists, loading, fetchMoreGistsByUsername } = useGistList({
-//   username: user.value?.username!,
-// })
+const {
+  loading: reportLoading,
+  totalGists,
+  totalFreeGists,
+  totalPaidGists,
+  totalSoldGists,
+} = useGistsReport({
+  user,
+  isMyself: true,
+})
+
+const { gists, loading, fetchMoreGistsByUsername } = useGistList({
+  username: user.value?.username!,
+})
 
 const { arrivedState } = useScroll(window, {
   offset: { bottom: 100 },
@@ -43,7 +51,7 @@ watch(
       return
     }
 
-    // fetchMoreGistsByUsername()
+    fetchMoreGistsByUsername()
   },
 )
 
@@ -51,10 +59,24 @@ const handleNavigateToDetail = (id: string) => {
   const { username } = route.params
   router.push(`/${username}/gist/${id}`)
 }
+
+const handlePaymentSetup = async () => {
+  // const response = await create(user.value?.email!)
+  // if (!response) {
+  //   return
+  // }
+  // window.location.href = response.onboardingUrl
+}
+
+onMounted(() => {
+  // validate(user.value?.paymentConnectedAccount)
+})
 </script>
 
 <template>
-  <!-- <WidgetGroup>
+  <!-- <PaymentSetupAlert @setup="handlePaymentSetup" v-if="!isValid" :loading="paymentCreateLoading" /> -->
+
+  <WidgetGroup>
     <WidgetGroupLoader :loading="reportLoading" :amount="3">
       <WidgetCondensed :value="totalGists" label="Gists do total" />
       <WidgetCondensed :value="totalFreeGists" label="Gists gratuitos" />
@@ -78,6 +100,5 @@ const handleNavigateToDetail = (id: string) => {
         />
       </GistCardGroupLoader>
     </GistCardGroup>
-  </WidgetDefault> -->
-  painel
+  </WidgetDefault>
 </template>

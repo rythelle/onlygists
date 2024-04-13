@@ -1,7 +1,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import type { Database } from '@/libs/supabase/schema'
-// import type { User } from '@/modules/users/entities/User/User'
-import { getMyselfAdapter, searchAddressByZipCodeAdapter } from './adapters'
+import type { User } from '@/modules/users/entities/User/User'
+import { getMyselfAdapter, readOneByUsernameAdapter, searchAddressByZipCodeAdapter } from './adapters'
 import type { AxiosInstance } from 'axios'
 import type { SearchAddressResponse } from './types'
 // httpClient: AxiosInstance
@@ -24,32 +24,34 @@ export default (client: SupabaseClient<Database>, httpClient: AxiosInstance) => 
     return user
   },
 
-  //   async readOneByUsername(username: string) {
-  //     const response = await client.from('profiles').select().eq('username', username).limit(1).single()
-  //     const user = readOneByUsernameAdapter(response.data)
-  //     return user
-  //   },
+  async readOneByUsername(username: string) {
+    const response = await client.from('profiles').select().eq('username', username).limit(1).single()
 
-  //   async update(id: string, { name, site, bio, phone, address }: User) {
-  //     await client
-  //       .from('profiles')
-  //       .update({
-  //         name,
-  //         site,
-  //         bio,
-  //         phone,
-  //         address: {
-  //           zipCode: address?.zipCode,
-  //           number: address?.number,
-  //           street: address?.street,
-  //           city: address?.city,
-  //           state: address?.state,
-  //           neighborhood: address?.neighborhood,
-  //           complement: address?.complement,
-  //         },
-  //       })
-  //       .eq('id', id)
+    const user = readOneByUsernameAdapter(response.data)
 
-  //     return { id }
-  //   },
+    return user
+  },
+
+  async update(id: string, { name, site, bio, phone, address }: User) {
+    await client
+      .from('profiles')
+      .update({
+        name,
+        site,
+        bio,
+        phone,
+        address: {
+          zipCode: address?.zipCode,
+          number: address?.number,
+          street: address?.street,
+          city: address?.city,
+          state: address?.state,
+          neighborhood: address?.neighborhood,
+          complement: address?.complement,
+        },
+      })
+      .eq('id', id)
+
+    return { id }
+  },
 })

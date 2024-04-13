@@ -3,7 +3,16 @@ import path from 'path'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', 'nuxt-primevue', '@nuxtjs/supabase'],
+  modules: [
+    'nuxt-primevue',
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/google-fonts',
+    '@nuxtjs/supabase',
+    '@nuxtjs/color-mode',
+    '@nuxtjs/seo',
+    '@vue-email/nuxt',
+    '@unlok-co/nuxt-stripe',
+  ],
   css: ['primeicons/primeicons.css'],
 
   imports: {
