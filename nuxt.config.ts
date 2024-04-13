@@ -10,13 +10,21 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     '@nuxtjs/color-mode',
     '@nuxtjs/seo',
-    '@vue-email/nuxt',
-    '@unlok-co/nuxt-stripe',
+    // '@vue-email/nuxt',
+    // '@unlok-co/nuxt-stripe',
   ],
   css: ['primeicons/primeicons.css'],
 
   imports: {
     dirs: ['./composables/useMarkdown', './composables/useServices', './composables/useLogger'],
+  },
+
+  site: {
+    url: process.env.SITE_URL,
+  },
+
+  ogImage: {
+    fonts: ['Inter:400', 'Inter:700'],
   },
 
   supabase: {

@@ -4,8 +4,6 @@ import type { Database } from '@/libs/supabase/schema'
 
 import type { CreateOptions, UpdateOptions, ReadAllOptions } from './types'
 import { readAllAdapter, readOneAdapter, type ReadAllRow, type ReadOneRow } from './adpaters'
-// import type { ReadAllRow, ReadOneRow } from './adapters'
-// import { readAllAdapter, readOneAdapter } from './adapters'
 
 export default (client: SupabaseClient<Database>) => ({
   async readAll({ username, from = 0, to = 10 }: ReadAllOptions) {

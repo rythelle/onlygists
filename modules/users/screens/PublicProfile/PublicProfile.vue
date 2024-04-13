@@ -55,14 +55,14 @@ const handleNavigateToDetail = (id: string) => {
   router.push(`/${username}/gist/${id}`)
 }
 
-// defineOgImage({
-//   component: 'PublicProfile',
-//   props: {
-//     avatarUrl: user.value?.avatarUrl,
-//     author: user.value?.name,
-//     bio: user.value?.bio,
-//   },
-// })
+defineOgImage({
+  component: 'PublicProfile',
+  props: {
+    avatarUrl: user.value?.avatarUrl,
+    author: user.value?.name,
+    bio: user.value?.bio,
+  },
+})
 
 useSeoMeta({
   title: `${user.value?.name} - @${user.value?.username}`,

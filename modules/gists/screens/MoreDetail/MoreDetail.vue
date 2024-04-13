@@ -46,13 +46,13 @@ onMounted(() => {
   }
 })
 
-// defineOgImage({
-//   component: 'GistDetail',
-//   props: {
-//     title: `${gist.value?.title} by @${gist.value?.profiles.username}`,
-//     description: `Veja o gist de ${gist.value?.profiles.name} no onlygists`,
-//   },
-// })
+defineOgImage({
+  component: 'GistDetail',
+  props: {
+    title: `${gist.value?.title} by @${gist.value?.profiles.username}`,
+    description: `Veja o gist de ${gist.value?.profiles.name} no onlygists`,
+  },
+})
 
 useSeoMeta({
   title: `${gist.value?.title} by @${gist.value?.profiles.name}`,
