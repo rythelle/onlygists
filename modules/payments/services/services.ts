@@ -9,8 +9,9 @@ import type {
   CreatePayoutAccountResponse,
   IsAccountValidResponse,
 } from './types'
+import type { AxiosInstance } from 'axios'
 
-export default (client: SupabaseClient<Database>) => ({
+export default (client: SupabaseClient<Database>, httpClient: AxiosInstance) => ({
   async readAllSales(userId: string) {
     const response = await client
       .from('sales')
@@ -21,23 +22,25 @@ export default (client: SupabaseClient<Database>) => ({
     return readAllSalesAdapter(response.data)
   },
 
-  // async createCheckout({ username, gistId, price }: CreateCheckoutOptions) {
-  //   const response = await httpClient.post<CreateCheckoutResponse>('/payments/checkout', {
-  //     username,
-  //     gistId,
-  //     price,
-  //   })
+  async createCheckout({ username, gistId, price }: CreateCheckoutOptions) {
+    const response = await httpClient.post<CreateCheckoutResponse>('/payments/checkout', {
+      username,
+      gistId,
+      price,
+    })
 
-  //   return response
-  // },
+    return response
+  },
 
-  // async createPayoutAccount(email: string) {
-  //   const response = await httpClient.post<CreatePayoutAccountResponse>('/payments/accounts', { email })
-  //   return response
-  // },
+  async createPayoutAccount(email: string) {
+    const response = await httpClient.post<CreatePayoutAccountResponse>('/payments/accounts', { email })
 
-  // async isAccountValid(accountId: string) {
-  //   const response = await httpClient.get<IsAccountValidResponse>(`/payments/accounts/${accountId}/valid`)
-  //   return response
-  // },
+    return response
+  },
+
+  async isAccountValid(accountId: string) {
+    const response = await httpClient.get<IsAccountValidResponse>(`/payments/accounts/${accountId}/valid`)
+
+    return response
+  },
 })

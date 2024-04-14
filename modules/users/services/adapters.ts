@@ -30,11 +30,13 @@ export function readOneByUsernameAdapter(data: Row | null): User | null {
     avatarUrl: data.avatar_url,
     username: data.username,
     name: data.name,
+    email: data.email,
     site: data.site ?? undefined,
     bio: data.bio ?? undefined,
     phone: data.phone ?? undefined,
     address,
     createdAt: new Date(data.created_at),
+    paymentConnectedAccount: data.payment_connected_account ?? '',
   }
 }
 
@@ -50,10 +52,12 @@ export function getMyselfAdapter(data: Row | null): User | null {
     avatarUrl: data.avatar_url,
     username: data.username,
     name: data.name,
+    email: data.email,
     site: data.site ?? undefined,
     bio: data.bio ?? undefined,
     phone: data.phone ?? undefined,
     address,
     createdAt: new Date(data.created_at),
+    paymentConnectedAccount: data.payment_connected_account ?? '',
   }
 }

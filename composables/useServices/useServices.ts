@@ -9,15 +9,16 @@ import PaymentService from '@/modules/payments/services/services'
 export function useServices() {
   const supabaseClient = useSupabaseClient<Database>()
   const config = useRuntimeConfig()
-  const httpClient = axios.create()
+  const cepHttpClient = axios.create()
+  const paymentHttpClient = axios.create({ baseURL: '/api' })
 
   return {
     auth: AuthService(supabaseClient, {
       redirectToUrl: `${config.public.siteUrl}/auth/github`,
     }),
-    users: UserService(supabaseClient, httpClient),
+    users: UserService(supabaseClient, cepHttpClient),
     gists: GistService(supabaseClient),
     reports: ReportService(supabaseClient),
-    payments: PaymentService(supabaseClient),
+    payments: PaymentService(supabaseClient, paymentHttpClient),
   }
 }
